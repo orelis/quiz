@@ -1,0 +1,25 @@
+<div *ngIf="!showScoring" class="center-div">
+  <ul class="wrap-question">
+    <li *ngFor="let quiz of quizs.Quiz" >
+      <div [ngClass]="{'hide-question': quiz.quizNum != quizCounter}">
+        <p>{{quiz.question}}</p>
+        <form>
+          <ul>
+            <li *ngFor="let answer of quiz.answers" [value]="answer.correctAnswer">
+              <span>{{answer.qNumber}}. </span> <input type="radio" name="answer.qNumber" (click)=checksCorrectAnswer(quiz,answer.correctAnswer) > <span>{{answer.quizAnswer}}</span><br>
+            </li>
+          </ul>
+      </form>
+      </div>
+    </li>
+  </ul>
+
+  <button class="float-left" *ngIf="quizCounter > 1" (click)="questionCounter(-1)">Prev</button>
+  <button class="float-right" *ngIf="quizCounter != this.dataLength" (click)="questionCounter(1)">Next</button>
+  <button class="float-right blue" *ngIf="quizCounter == this.dataLength" (click)="quizDone()">Done</button>
+</div>
+
+<div *ngIf="showScoring" class="center-div scoring">
+  <h1>SCORING</h1>
+  <h2>{{scoringCounter}}</h2>
+</div>
